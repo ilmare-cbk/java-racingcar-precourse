@@ -29,6 +29,6 @@ public class CarTest {
     void carNameExceptionStartingWithPrefixTest(String input) {
         Assertions.assertThatThrownBy(() -> new Car(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("[ERROR]");
+                .hasMessageStartingWith("[ERROR]");
     }
 }

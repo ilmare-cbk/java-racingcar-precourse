@@ -1,4 +1,4 @@
-package racingcar.domain;
+package racingcar.domain.car;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -7,14 +7,14 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.contant.ExceptionMessage;
 
-public class CarTest {
+class CarTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"a", "abcde"})
     @DisplayName("자동차는 1 ~ 5자 이내의 이름을 갖는다.")
     void carNameTest(String input) {
         Car car = new Car(input);
-        Assertions.assertThat(car.getName()).isEqualTo(input);
+        Assertions.assertThat(car.getName()).isEqualTo(Name.from(input));
     }
 
     @ParameterizedTest
@@ -40,7 +40,7 @@ public class CarTest {
     void carMoveTest(int input, int expected) {
         Car car = new Car("자동차1");
         car.move(input);
-        Assertions.assertThat(car.getDistance()).isEqualTo(expected);
+        Assertions.assertThat(car.getDistance()).isEqualTo(Distance.from(expected));
     }
 
     @ParameterizedTest

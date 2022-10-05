@@ -3,7 +3,9 @@ package racingcar.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import racingcar.contant.ExceptionMessage;
 
 public class CarTest {
 
@@ -29,6 +31,25 @@ public class CarTest {
     void carNameExceptionStartingWithPrefixTest(String input) {
         Assertions.assertThatThrownBy(() -> new Car(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageStartingWith("[ERROR]");
+                .hasMessageStartingWith(ExceptionMessage.INVALID_CAR_NAME);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"4:1", "9:1", "3:0", "0:0"}, delimiter = ':')
+    @DisplayName("4 이상이면 전진, 3 이하이면 멈춤")
+    void carMoveTest(int input, int expected) {
+        Car car = new Car("자동차1");
+        car.move(input);
+        Assertions.assertThat(car.getDistance()).isEqualTo(expected);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 10})
+    @DisplayName("0 ~ 9 이외의 입력값에는 예외 발생")
+    void carMoveExceptionTest(int input) {
+        Car car = new Car("자동차1");
+        Assertions.assertThatThrownBy(() -> car.move(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageStartingWith(ExceptionMessage.INVALID_CAR_FUEL);
     }
 }

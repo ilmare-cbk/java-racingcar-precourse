@@ -1,7 +1,10 @@
 package racingcar.domain.car;
 
+import java.util.Arrays;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -51,5 +54,19 @@ class CarTest {
         Assertions.assertThatThrownBy(() -> car.move(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageStartingWith(ExceptionMessage.INVALID_CAR_FUEL);
+    }
+
+    @Test
+    @DisplayName("입력값에 따라 이동한 총 거리 확인")
+    void carDistanceTest() {
+        // given
+        Car car = new Car("자동차1");
+        List<Integer> inputs = Arrays.asList(4, 0, 9, 3);
+
+        // when
+        inputs.forEach(car::move);
+
+        // then
+        Assertions.assertThat(car.getDistance()).isEqualTo(Distance.from(2));
     }
 }

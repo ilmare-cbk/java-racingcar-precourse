@@ -37,4 +37,8 @@ public class Distance {
     public int hashCode() {
         return Objects.hash(value);
     }
+
+    public boolean greaterThanOrEqual(Distance distance) {
+        return this.value >= distance.value;
+    }
 }

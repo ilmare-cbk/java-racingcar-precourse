@@ -9,9 +9,13 @@ public class Car {
     private final Name name;
     private Distance distance;
 
-    public Car(String name) {
+    private Car(String name) {
         this.name = Name.from(name);
         this.distance = Distance.init();
+    }
+
+    public static Car from(String name) {
+        return new Car(name);
     }
 
     public Name getName() {
@@ -33,5 +37,16 @@ public class Car {
 
     public Distance getDistance() {
         return this.distance;
+    }
+
+    public Car findWinner(Car car) {
+        if (this.distance.greaterThanOrEqual(car.getDistance())) {
+            return this;
+        }
+        return car;
+    }
+
+    public boolean isSameDistance(Car car) {
+        return this.distance.equals(car.distance);
     }
 }

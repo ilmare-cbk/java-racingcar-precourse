@@ -90,10 +90,10 @@ class CarsTest {
         return testCars;
     }
 
-    private void moveTestCars(List<Car> testCars, int... distances) {
+    private void moveTestCars(List<Car> testCars, int... fuels) {
         for (int i = 0; i < testCars.size(); i++) {
             Car testCar = testCars.get(i);
-            testCar.move(distances[i]);
+            testCar.move(fuels[i]);
         }
     }
 }

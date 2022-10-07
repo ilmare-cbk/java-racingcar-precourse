@@ -1,11 +1,10 @@
 package racingcar.domain.car;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import racingcar.contant.ExceptionMessage;
-import racingcar.contant.RacingCarConstant;
+import racingcar.domain.fuel.FuelGenerator;
 
 public class Cars {
 
@@ -51,9 +50,9 @@ public class Cars {
         }
     }
 
-    public void move() {
+    public void move(FuelGenerator fuelGenerator) {
         for (Car racingCar : this.racingCars) {
-            racingCar.move(Randoms.pickNumberInRange(RacingCarConstant.CAR_MIN_FUEL, RacingCarConstant.CAR_MAX_FUEL));
+            racingCar.move(fuelGenerator.generate());
         }
     }
 
